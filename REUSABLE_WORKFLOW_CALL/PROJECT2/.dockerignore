@@ -1,0 +1,22 @@
+docker-actions/
+.venv/
+
+# Exclude uv cache and local state
+.uv/
+
+# Exclude standard Python cache files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Exclude local git and IDE configs
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Exclude Docker files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore

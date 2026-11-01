@@ -1,0 +1,37 @@
+name: reusable docker build template
+
+on:
+  workflow_call:
+    inputs:
+      folder-name:
+        type: string
+        required: true
+      image-name:
+        type: string
+        required: true
+      tag-name:
+        type: string
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: docker login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: docker build image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./${{ inputs.folder-name }}
+          file: ./${{ inputs.folder-name }}/Dockerfile
+          push: true
+          tags: | # comment for the future this is important tells yml value has multiple lines 
+            cheogm28/${{ inputs.image-name }}:${{ inputs.tag-name }}
+            cheogm28/${{ inputs.image-name }}:${{ github.sha }}
