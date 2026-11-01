@@ -9,7 +9,7 @@ on:
 
 jobs:
   call-reusable-build:
-    uses: ./.github/workflows/docker-reusable.yml
+    uses: .github/workflows/docker-reusable.yml
     with:
       folder-name: 'REUSABLE_WORKFLOW_CALL/PROJECT1'
       image-name: 'project1-image'
